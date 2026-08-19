@@ -1,0 +1,652 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Toolkitzy | AI Tools Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<style>
+  /* EXTREME RESET - WordPress theme override fix */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+
+  body {
+    background: #FFFFFF;
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    color: #0F172A;
+    scroll-behavior: smooth;
+  }
+
+
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+    position: relative;
+  }
+
+
+  /* HERO SECTION */
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    margin-bottom: 48px;
+  }
+
+
+  .hero h1 {
+    font-size: clamp(34px, 6vw, 56px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 70%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+
+
+  .hero h1 span {
+    background: linear-gradient(135deg, #7C3AED, #2563EB);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 800;
+  }
+
+
+  .hero p {
+    color: #475569;
+    max-width: 620px;
+    font-size: 1.1rem;
+    line-height: 1.4;
+    margin-top: -4px;
+  }
+
+
+  .search-wrapper {
+    width: 100%;
+    max-width: 620px;
+    margin-top: 8px;
+  }
+
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: #FFFFFF;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 60px;
+    padding: 12px 22px;
+    transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+  }
+
+
+  .search-box:focus-within {
+    border-color: #7C3AED;
+    box-shadow: 0 12px 28px rgba(124, 58, 237, 0.18), 0 0 0 3px rgba(124, 58, 237, 0.1);
+    transform: translateY(-1px);
+  }
+
+
+  .search-box i {
+    color: #94A3B8;
+    font-size: 1.2rem;
+    margin-right: 12px;
+  }
+
+
+  .search-box input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 500;
+    background: transparent;
+    color: #0F172A;
+  }
+
+
+  .search-box input::placeholder {
+    color: #94A3B8;
+    font-weight: 450;
+    letter-spacing: -0.2px;
+  }
+
+
+  /* TAGS */
+  .tags {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 16px 0 12px;
+  }
+
+
+  .tag {
+    padding: 8px 20px;
+    background: #F1F5F9;
+    color: #1E293B;
+    border-radius: 40px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(2px);
+    letter-spacing: -0.2px;
+    border: 1px solid transparent;
+  }
+
+
+  .tag:hover {
+    background: #E0E7FF;
+    color: #7C3AED;
+    transform: translateY(-2px);
+    border-color: #C7D2FE;
+  }
+
+
+  /* ============================================ */
+  /* CRITICAL FIX FOR WORDPRESS - RIGHT ALIGN SELECTOR */
+  /* ============================================ */
+  .controls-wrapper {
+    width: 100%;
+    margin: 20px 0 28px;
+    display: block !important;
+  }
+
+
+  /* The main row that holds the select - forcing right alignment */
+  .controls-row {
+    display: flex !important;
+    justify-content: flex-end !important;
+    align-items: center !important;
+    width: 100% !important;
+    text-align: right !important;
+    float: none !important;
+    clear: both !important;
+  }
+
+
+  /* The select element itself - strict right alignment */
+  .select {
+    border: 1px solid #E2E8F0 !important;
+    border-radius: 48px !important;
+    padding: 10px 20px !important;
+    background: #FFFFFF !important;
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+    cursor: pointer !important;
+    color: #0F172A !important;
+    font-family: 'Inter', monospace !important;
+    outline: none !important;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.02) !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    display: inline-block !important;
+    width: auto !important;
+    min-width: 130px !important;
+    text-align: left !important;
+  }
+
+
+  .select:focus {
+    border-color: #7C3AED !important;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.2) !important;
+  }
+
+
+  /* CARDS */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+    margin-bottom: 32px;
+  }
+
+
+  .card {
+    background: #FFFFFF;
+    border-radius: 28px;
+    padding: 24px 22px;
+    border: 1px solid #EEF2F6;
+    transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 20px -6px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.02);
+  }
+
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #7C3AED, #3B82F6, #7C3AED);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+  }
+
+
+  .card:hover::before {
+    transform: scaleX(1);
+  }
+
+
+  .card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 28px 40px -18px rgba(124, 58, 237, 0.25), 0 10px 20px -8px rgba(0, 0, 0, 0.08);
+    border-color: #E0E7FF;
+    background: #FEFEFF;
+  }
+
+
+  .card .card-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, #F3E8FF, #EFF6FF);
+    border-radius: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    font-size: 1.6rem;
+    color: #7C3AED;
+    transition: 0.2s;
+  }
+
+
+  .card:hover .card-icon {
+    background: linear-gradient(135deg, #7C3AED20, #2563EB20);
+    transform: scale(1.02);
+  }
+
+
+  .card h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: -0.3px;
+    color: #0F172A;
+    line-height: 1.3;
+  }
+
+
+  .card p {
+    color: #475569;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    font-weight: 450;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+
+  .card .card-arrow {
+    position: absolute;
+    bottom: 22px;
+    right: 22px;
+    opacity: 0;
+    transition: opacity 0.25s, transform 0.2s;
+    color: #7C3AED;
+    font-size: 1rem;
+  }
+
+
+  .card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(4px);
+  }
+
+
+  /* PAGINATION */
+  .pagination {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+
+  .page-btn {
+    padding: 9px 16px;
+    border-radius: 40px;
+    border: 1px solid #E2E8F0;
+    background: #FFFFFF;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #334155;
+    transition: all 0.2s ease;
+    min-width: 44px;
+  }
+
+
+  .page-btn:hover {
+    border-color: #7C3AED;
+    background: #F8FAFF;
+    color: #7C3AED;
+    transform: translateY(-2px);
+  }
+
+
+  .page-btn.active {
+    background: linear-gradient(135deg, #7C3AED, #2563EB);
+    color: white;
+    border: none;
+    box-shadow: 0 6px 14px rgba(124, 58, 237, 0.3);
+  }
+
+
+  /* RESPONSIVE */
+  @media (max-width: 760px) {
+    .container {
+      padding: 20px 18px;
+    }
+    .hero {
+      gap: 14px;
+    }
+    .cards {
+      gap: 20px;
+    }
+    .card {
+      padding: 20px;
+    }
+    .card h3 {
+      font-size: 1.2rem;
+    }
+    .controls-row {
+      justify-content: flex-end !important;
+    }
+    .select {
+      margin-left: auto !important;
+      padding: 8px 16px !important;
+      font-size: 0.75rem !important;
+    }
+  }
+
+
+  @media (max-width: 480px) {
+    .tag {
+      padding: 5px 14px;
+      font-size: 0.75rem;
+    }
+    .search-box {
+      padding: 10px 18px;
+    }
+    .select {
+      min-width: 120px !important;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <h1>Online <span>Free AI Tools</span> <br> to Boost Productivity</h1>
+    <p>Simple, fast and effective tools built to solve real problems without complexity.</p>
+    <div class="search-wrapper">
+      <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="search" placeholder="" autocomplete="off">
+      </div>
+    </div>
+    <div class="tags">
+      <div class="tag" data-tag="all">✨ All</div>
+      <div class="tag" data-tag="seo">🔍 SEO</div>
+      <div class="tag" data-tag="content">📝 Content</div>
+      <div class="tag" data-tag="marketing">📈 Marketing</div>
+      <div class="tag" data-tag="analysis">📊 Analysis</div>
+    </div>
+  </div>
+
+
+  <!-- PER PAGE SELECTOR - FORCED RIGHT ALIGNMENT -->
+  <div class="controls-wrapper">
+    <div class="controls-row">
+      <select id="perPageSelect" class="select">
+        <option value="10" selected>10 per page</option>
+        <option value="20">20 per page</option>
+        <option value="30">30 per page</option>
+        <option value="50">50 per page</option>
+        <option value="80">80 per page</option>
+        <option value="100">100 per page</option>
+      </select>
+    </div>
+  </div>
+
+
+  <div class="cards" id="cards"></div>
+  <div class="pagination" id="pagination"></div>
+</div>
+
+
+<script>
+// TOOLS DATA
+const tools = [
+  { cat: "content", title: "Topic Gap Finder", desc: "Find the topics your competitors wrote — you didn't", link: "https://topicgapanalyzer.lovable.app/", icon: "🧩" },
+  { cat: "content", title: "Keyword Frequency Analyzer", desc: "Count keyword frequency in any content instantly", link: "https://keywordfrequencyanalyzer.lovable.app/", icon: "📊" },
+  { cat: "content", title: "Topic Outline Gap Finder", desc: "Build Topic Outline that Ranks #1 on Google", link: "https://topicsoutlinegapfinder.lovable.app/", icon: "📌" },
+  { cat: "seo", title: "Meta Tags Generator", desc: "Create meta tags that outrank the competition", link: "https://metatagsgenerator.lovable.app", icon: "🏷️" },
+  { cat: "seo", title: "SEO Audit Generator", desc: "Find out why you're not ranking #1 on Google", link: "https://webpageaudittool.lovable.app/", icon: "🔎" },
+  { cat: "content", title: "Human Content Writer", desc: "Write blog articles that outrank the top results.", link: "https://toolkitzy.com/human-content-writer/", icon: "✍️" },
+  { cat: "analysis", title: "Webpage Indexing Checker", desc: "Check if your pages are indexed on Google", link: "https://webpageindexingchecker.lovable.app/", icon: "🌐" },
+  { cat: "seo", title: "AI Schema Generator", desc: "Generate JSON-LD Schema from any webpage URL", link: "https://schemacodegenerator.lovable.app/", icon: "🤖" },
+  { cat: "analysis", title: "Topical Authority Builder", desc: "Build a complete topical authority map in seconds", link: "https://topicalauthoritybuilder.lovable.app/", icon: "🏗️" }
+];
+
+
+const extendedTools = [...tools];
+let currentPage = 1;
+let perPage = 10;
+let filteredTools = [...extendedTools];
+let activeTag = "all";
+
+
+const cardsContainer = document.getElementById('cards');
+const paginationContainer = document.getElementById('pagination');
+const perPageSelect = document.getElementById('perPageSelect');
+const searchInput = document.getElementById('search');
+
+
+function getIconForTool(tool) {
+  if (tool.icon) return tool.icon;
+  const catIconMap = { content: "📝", seo: "🔍", marketing: "📢", analysis: "📈" };
+  return catIconMap[tool.cat] || "🛠️";
+}
+
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/[&<>]/g, function(m) {
+    if (m === '&') return '&amp;';
+    if (m === '<') return '&lt;';
+    if (m === '>') return '&gt;';
+    return m;
+  });
+}
+
+
+function renderTools() {
+  cardsContainer.innerHTML = '';
+  const start = (currentPage - 1) * perPage;
+  const end = start + perPage;
+  const pageItems = filteredTools.slice(start, end);
+
+
+  if (pageItems.length === 0) {
+    cardsContainer.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding: 60px 20px; background:#FAFAFE; border-radius: 48px;"><i class="fas fa-magic" style="font-size: 42px; color:#CBD5E1;"></i><h3 style="margin-top:16px; font-weight:600;">No tools found</h3><p style="color:#64748B;">Try adjusting your search or category</p></div>`;
+    return;
+  }
+
+
+  pageItems.forEach(tool => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    const iconSymbol = getIconForTool(tool);
+    const categoryBadge = tool.cat.charAt(0).toUpperCase() + tool.cat.slice(1);
+    card.innerHTML = `
+      <div class="card-icon">${iconSymbol}</div>
+      <h3>${escapeHtml(tool.title)}</h3>
+      <p>${escapeHtml(tool.desc)} <span style="font-size: 11px; background:#F1F4F9; padding:2px 8px; border-radius: 40px; color:#475569;">${categoryBadge}</span></p>
+      <div class="card-arrow"><i class="fas fa-arrow-right"></i></div>
+    `;
+    card.addEventListener('click', (e) => {
+      e.stopPropagation();
+      window.open(tool.link, '_blank');
+    });
+    cardsContainer.appendChild(card);
+  });
+}
+
+
+function renderPagination() {
+  paginationContainer.innerHTML = '';
+  const totalPages = Math.ceil(filteredTools.length / perPage);
+  if (totalPages <= 1) return;
+
+
+  const maxVisible = 5;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+  let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+  if (endPage - startPage + 1 < maxVisible) startPage = Math.max(1, endPage - maxVisible + 1);
+
+
+  if (startPage > 1) {
+    addPageButton(1);
+    if (startPage > 2) addEllipsis();
+  }
+  for (let i = startPage; i <= endPage; i++) addPageButton(i);
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) addEllipsis();
+    addPageButton(totalPages);
+  }
+
+
+  function addPageButton(pageNum) {
+    const btn = document.createElement('button');
+    btn.className = 'page-btn' + (pageNum === currentPage ? ' active' : '');
+    btn.innerText = pageNum;
+    btn.onclick = () => {
+      currentPage = pageNum;
+      update();
+      document.querySelector('.cards')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+    paginationContainer.appendChild(btn);
+  }
+  function addEllipsis() {
+    const span = document.createElement('span');
+    span.innerText = '...';
+    span.style.padding = '0 4px';
+    span.style.color = '#94a3b8';
+    paginationContainer.appendChild(span);
+  }
+}
+
+
+function updateFiltersAndPagination() {
+  let searchTerm = searchInput.value.toLowerCase().trim();
+  let filtered = [...extendedTools];
+  if (searchTerm !== "") filtered = filtered.filter(t => t.title.toLowerCase().includes(searchTerm) || t.desc.toLowerCase().includes(searchTerm));
+  if (activeTag !== "all") filtered = filtered.filter(t => t.cat === activeTag);
+  filteredTools = filtered;
+  currentPage = 1;
+  update();
+}
+
+
+function update() {
+  renderTools();
+  renderPagination();
+}
+
+
+perPageSelect.addEventListener('change', (e) => {
+  perPage = parseInt(e.target.value, 10);
+  currentPage = 1;
+  update();
+});
+
+
+searchInput.addEventListener('input', () => updateFiltersAndPagination());
+
+
+// TAG FILTERING
+const tagElements = document.querySelectorAll('.tag');
+tagElements.forEach(tag => {
+  tag.addEventListener('click', () => {
+    const tagValue = tag.getAttribute('data-tag');
+    if (tagValue) {
+      activeTag = tagValue;
+      updateFiltersAndPagination();
+      tagElements.forEach(t => { t.style.background = "#F1F5F9"; t.style.color = "#1E293B"; });
+      tag.style.background = "#E0E7FF";
+      tag.style.color = "#7C3AED";
+    }
+  });
+});
+
+
+// TYPING ANIMATION
+const keywords = ["Keyword Research Tool", "SEO Audit Tool", "Meta Tags Generator", "Content Idea Generator", "Backlink Checker", "Topic Gap Finder"];
+let kwIndex = 0, charPos = 0, isDeleting = false;
+
+
+function typeEffect() {
+  const inputField = searchInput;
+  if (!inputField) return;
+  const currentKeyword = keywords[kwIndex];
+  if (isDeleting) {
+    inputField.placeholder = currentKeyword.substring(0, charPos - 1);
+    charPos--;
+    if (charPos === 0) {
+      isDeleting = false;
+      kwIndex = (kwIndex + 1) % keywords.length;
+      setTimeout(typeEffect, 200);
+      return;
+    }
+    setTimeout(typeEffect, 45);
+  } else {
+    inputField.placeholder = currentKeyword.substring(0, charPos + 1);
+    charPos++;
+    if (charPos === currentKeyword.length) {
+      isDeleting = true;
+      setTimeout(typeEffect, 1800);
+      return;
+    }
+    setTimeout(typeEffect, 85);
+  }
+}
+
+
+function init() {
+  update();
+  typeEffect();
+  const allTagElem = document.querySelector('.tag[data-tag="all"]');
+  if(allTagElem) { allTagElem.style.background = "#E0E7FF"; allTagElem.style.color = "#7C3AED"; }
+  activeTag = "all";
+  filteredTools = [...extendedTools];
+  update();
+}
+init();
+</script>
+</body>
+</html>
