@@ -416,6 +416,10 @@ const tools = [
   { cat: "seo", title: "Keyword Research Tool", desc: "Discover keywords that actually rank", link: "https://keyword-research-tool.lovable.app/", icon: "📈" },
   { cat: "utilities", title: "Document Format Converter", desc: "Convert any document in just one click", link: "https://documentsconverter.lovable.app/", icon: "📂" },
   { cat: "marketing", title: "Insta Caption Generator", desc: "Create engaging Instagram captions in seconds.", link: "https://instacaptiongenerator.lovable.app/", icon: "✨" },
+  { cat: "Utilities", title: "Storage Drive", desc: "Monitor, manage, and optimize your storage.", link: "https://magic-drive.lovable.app/", icon: "🗄️" },
+  { cat: "Trading", title: "ETF Portal", desc: "Track, compare, and analyze ETFs with powerful market insights in one place.", link: "https://etf-portal.lovable.app/", icon: "🧭" },
+  { cat: "Trading", title: "SMC Charts", desc: "Analyze market structure, liquidity", link: "https://smc-charts.vercel.app/", icon: "🎯" },
+  { cat: "Trading", title: "Sheet CMS", desc: "Manage, organize, and update your Google sheets.", link: "https://sheet-cms.vercel.app/", icon: "📋" },
 ];
 
 const extendedTools = [...tools];
@@ -431,7 +435,7 @@ const searchInput = document.getElementById('search');
 
 function getIconForTool(tool) {
   if (tool.icon) return tool.icon;
-  const catIconMap = { content: "📝", seo: "🔍", marketing: "📢", analysis: "📈", Utilities: "🛠️" };
+  const catIconMap = { content: "📝", seo: "🔍", marketing: "📢", analysis: "📊", Utilities: "🛠️", Trading: "📈" };
   return catIconMap[tool.cat] || "🛠️";
 }
 
